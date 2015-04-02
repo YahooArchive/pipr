@@ -172,13 +172,3 @@ if __name__ == "__main__":
     failed_pkgs, installed_pkgs = install_missing_pkgs(imports)
     report_failed_pkgs(failed_pkgs)
     report_installed_pkgs(installed_pkgs, requirements)
-
-
-# feature:
-# let user specify which version of missing package to install
-# feature:
-# if user enters non-specific or wrong version, suggest available versions
-
-# future feature:
-# integrate with flake8 to warn unused imports and don't install them
-# ask to still install if it's unused?

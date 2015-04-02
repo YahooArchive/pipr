@@ -5,6 +5,8 @@
 import json
 import os
 
+from pipr import *
+
 
 _metadata_file = os.path.join(
     os.path.dirname(__file__),
