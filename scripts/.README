@@ -1,0 +1,4 @@
+This directory contains any scripts that should be placed in the package
+
+Any scripts placed in this directory will be installed in the system bin
+directory when the package is installed.
