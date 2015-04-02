@@ -44,6 +44,14 @@ class TestPipr(unittest.TestCase):
         self.assertEqual(imports[0], 'x')
         self.assertEqual(imports[1], 'abc')
 
+    def test_install_missing_pkgs(self):
+        """Make sure installed and un-installed packages are returned"""
+        (failed_pkgs, installed_pkgs) = pipr.install_missing_pkgs(['nomodule'])
+        self.assertTrue(isinstance(failed_pkgs, dict))
+        self.assertTrue(isinstance(installed_pkgs, list))
+        self.assertFalse(isinstance(installed_pkgs, dict))
+        self.assertFalse(isinstance(failed_pkgs, list))
+
 
 if __name__ == '__main__':
     unittest.main()
