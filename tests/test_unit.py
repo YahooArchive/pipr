@@ -51,6 +51,8 @@ class TestPipr(unittest.TestCase):
         self.assertTrue(isinstance(installed_pkgs, list))
         self.assertFalse(isinstance(installed_pkgs, dict))
         self.assertFalse(isinstance(failed_pkgs, list))
+        self.assertEqual(len(failed_pkgs), 1)
+        self.assertEqual(len(installed_pkgs), 0)
 
 
 if __name__ == '__main__':
