@@ -31,7 +31,7 @@ Description
 pipr can install missing dependencies for any Python file and generate a requirements.txt file, so that YOU don't have to worry about searching for and installing the dependencies manually
 
 Requirements
-------------
+============
 pipr currently requires Python 2.7, but we are working on supporting Python 3
 
 Installation
@@ -45,7 +45,9 @@ To install pipr, simply:
 
 Usage
 =====
+
 .. code-block::
+
     $ pipr -h
     usage: pipr [-h] [-r] [-d] filepath
 
@@ -59,6 +61,7 @@ Usage
         -d, --debug         Add --debug to see debug output
         
 .. code-block::
+
     $ cat test.py 
     import argparse
     import sshmap, redislite
