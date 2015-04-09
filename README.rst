@@ -81,5 +81,5 @@ More Information
 ================
 * Free software: BSD license, see LICENSE.txt for details
 * Documentation: https://pipr.readthedocs.org
-* Contributing: We welcome pull requests! Please check the 'Contributing' section of the above documentation for requirements
+* Contributing: We welcome pull requests! Please check CONTRIBUTING.md for requirements
 * Contact information: ypython@yahoogroups.com
