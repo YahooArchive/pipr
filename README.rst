@@ -4,8 +4,8 @@ Tool to pip install missing imports and more
 
 Build Status
 ============
-.. image:: https://img.shields.io/travis/slupers/pipr.svg
-        :target: https://travis-ci.org/slupers/pipr
+.. image:: https://img.shields.io/travis/yahoo/pipr.svg
+        :target: https://travis-ci.org/yahoo/pipr
 
 .. image:: https://coveralls.io/repos/yahoo/pipr/badge.svg
   :target: https://coveralls.io/r/yahoo/pipr
