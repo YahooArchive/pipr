@@ -22,7 +22,7 @@ Build Status
 .. image:: https://pypip.in/license/pipr/badge.svg
     :target: https://pypi.python.org/pypi/pipr/
 
-.. image:: https://readthedocs.org/projects/piprbadge/?version=latest
+.. image:: https://readthedocs.org/projects/pipr/badge/?version=latest
     :target: http://pipr.readthedocs.org/en/latest/
     :alt: Documentation Status
  
