@@ -76,6 +76,8 @@ Usage
     $ pipr test.py -d -r
     Imported packages: argparse, sshmap, redislite, urllib2, sbi, time
     Missing packages installed: sshmap==0.6.90, sbi==0.0.7
+
+Because we added -r, there will a requirements.txt file generated in the current directory.
    
 More Information
 ================
