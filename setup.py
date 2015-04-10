@@ -20,7 +20,7 @@ setup_arguments = {
     'author': 'Sergey Lupersolsky, Yash Bathia',
     'author_email': 'ypython@yahoogroups.com',
     'url': 'http://github.com/yahoo/pipr',
-    'license': 'LICENSE.txt',
+    'license': 'BSD',
     'packages': ['pipr'],
     'long_description': 'Tool to pip install missing imports and more',
     'description': 'Tool to pip install missing imports and more',
