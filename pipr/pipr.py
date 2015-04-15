@@ -26,12 +26,16 @@ except ImportError:
                               "directions here: {0}".format(pip_url))
 
 
+PIP_VERSION = pkg_resources.parse_version(pkg_resources.get_distribution("pip").version)
+# since pip 6.1.0, error output is in stderr instead of stdout
+STDERR_PIP_VERSION = pkg_resources.parse_version("6.1.0")
+
 logger = logging.getLogger(__name__)
 logger.addHandler(logging.StreamHandler())
 
 
 class WritableObject(object):
-    """Object to redirect sys.stdout to"""
+    """Object to redirect output (stdout and stderr) to"""
     def __init__(self):
         self.content = []
 
@@ -115,21 +119,31 @@ def install_missing_pkgs(imports):
         except ImportError as imp_err:
             missing_module = imp_err.message.split()[-1]
 
-            write_obj = WritableObject()  # a writable object
-            sys.stdout = write_obj  # redirection
+            # redirect stdout and stderr
+            stdout_write_obj = WritableObject()
+            stderr_write_obj = WritableObject()
+            sys.stdout = stdout_write_obj
+            sys.stderr = stderr_write_obj
 
-            pip_ret = pip.main(["install", missing_module, "--upgrade"])
+            pip_ret = pip.main(["install", missing_module, "--upgrade",
+                                "--quiet"])
 
-            sys.stdout = sys.__stdout__  # return to default
+            # return to default
+            sys.stdout = sys.__stdout__
+            sys.stderr = sys.__stderr__
 
             # check pip return value
             if pip_ret:
                 # remember this as a failed pkg and save reason
                 # assuming last line of pip output is the error
-                failed_pkgs[pkg] = write_obj.content[-1].strip(" \n")
+                # since pip 6.1.0, error output is in stderr instead of stdout
+                if PIP_VERSION >= STDERR_PIP_VERSION:
+                    failed_pkgs[pkg] = stderr_write_obj.content[-1].strip(" \n")
+                else:
+                    failed_pkgs[pkg] = stdout_write_obj.content[-1].strip(" \n")
             else:
                 version = pkg_resources.get_distribution(pkg).version
-                installed_pkgs.append(missing_module + '==' + version)
+                installed_pkgs.append(missing_module + "==" + version)
         except Exception:  # ignore potential errors in imported packages
             continue
 
@@ -146,7 +160,7 @@ def report_failed_pkgs(failed_pkgs):
 def report_installed_pkgs(installed_pkgs, requirements):
     """Report packages installed, create requirements.txt if user requested"""
     if installed_pkgs:
-        logger.info("Missing packages installed: " + ', '.join(installed_pkgs))
+        logger.info("Missing packages installed: " + ", ".join(installed_pkgs))
         if requirements:  # user requested requirements.txt to be generated
             with open("requirements.txt", "w") as req_file:
                 for pkg in installed_pkgs:
