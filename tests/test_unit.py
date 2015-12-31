@@ -29,6 +29,12 @@ class TestPipr(unittest.TestCase):
         self.assertFalse(filepath == 'abc')
         self.assertTrue(requirements)
         self.assertTrue(debug)
+        (filepath, requirements, debug) = None, None, None
+        try:
+            (filepath, requirements, debug) = pipr.get_and_parse_args()
+        except:
+            self.assertFalse(requirements)
+            self.assertFalse(debug)
 
     def test_get_all_imports(self):
         """Create a tempfile with imports and make sure we get them"""
@@ -53,7 +59,6 @@ class TestPipr(unittest.TestCase):
         self.assertFalse(isinstance(failed_pkgs, list))
         self.assertEqual(len(failed_pkgs), 1)
         self.assertEqual(len(installed_pkgs), 0)
-
 
 if __name__ == '__main__':
     unittest.main()
