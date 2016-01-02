@@ -40,15 +40,17 @@ class TestPipr(unittest.TestCase):
         """Create a tempfile with imports and make sure we get them"""
         code_file = tempfile.NamedTemporaryFile(delete=False)
         code_file.write("from x import y\n")
+        code_file.write("from p.q import r\n")
         code_file.write("import abc\n")
         code_file.write("# import world")
         code_file.close()
         imports = pipr.get_all_imports(code_file.name)
         os.remove(code_file.name)
         self.assertNotEqual(len(imports), 0)
-        self.assertEqual(len(imports), 2)
+        self.assertEqual(len(imports), 3)
         self.assertEqual(imports[0], 'x')
-        self.assertEqual(imports[1], 'abc')
+        self.assertEqual(imports[1], 'p')
+        self.assertEqual(imports[2], 'abc')
 
     def test_install_missing_pkgs(self):
         """Make sure installed and un-installed packages are returned"""

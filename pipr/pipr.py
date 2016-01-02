@@ -61,7 +61,13 @@ class ImportParser(ast.NodeVisitor):
 
     def visit_ImportFrom(self, statement):
         """Find 'from x import y' types of statements"""
-        self.imports.append(statement.module)
+        # from x.y import z, then module is x
+        if '.' in statement.module:
+            module_name = statement.module.split('.')[0]
+            self.imports.append(module_name)
+        # from x import y, then module is x
+        else:
+            self.imports.append(statement.module)
         # continue parsing
         super(ImportParser, self).generic_visit(statement)
 
