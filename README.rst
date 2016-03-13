@@ -5,26 +5,26 @@ Tool to pip install missing imports and more
 Build Status
 ============
 .. image:: https://img.shields.io/travis/yahoo/pipr.svg
-        :target: https://travis-ci.org/yahoo/pipr
+     :target: https://travis-ci.org/yahoo/pipr
 
 .. image:: https://coveralls.io/repos/yahoo/pipr/badge.svg
-  :target: https://coveralls.io/r/yahoo/pipr
+     :target: https://coveralls.io/r/yahoo/pipr
 
-.. image:: https://pypip.in/download/pipr/badge.svg
-    :target: https://pypi.python.org/pypi/pipr/
+.. image:: https://img.shields.io/pypi/dm/pipr.svg
+     :target: https://pypi.python.org/pypi/pipr
     
-.. image:: https://pypip.in/version/pipr/badge.svg
-   :target: https://pypi.python.org/pypi/pipr
+.. image:: https://img.shields.io/pypi/v/pipr.svg
+     :target: https://pypi.python.org/pypi/pipr
 
-.. image:: https://pypip.in/py_versions/pipr/badge.svg
-    :target: https://pypi.python.org/pypi/pipr/
+.. image:: https://img.shields.io/pypi/pyversions/pipr.svg
+     :target: https://pypi.python.org/pypi/pipr
 
-.. image:: https://pypip.in/license/pipr/badge.svg
-    :target: https://pypi.python.org/pypi/pipr/
+.. image:: https://img.shields.io/badge/license-New%20BSD-blue.svg
+     :target: https://raw.githubusercontent.com/yahoo/pipr/master/LICENSE.txt
 
 .. image:: https://readthedocs.org/projects/pipr/badge/?version=latest
-    :target: http://pipr.readthedocs.org/en/latest/
-    :alt: Documentation Status
+     :target: http://pipr.readthedocs.org/en/latest
+     :alt: Documentation Status
  
 Description
 ===========
