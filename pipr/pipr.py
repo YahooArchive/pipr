@@ -4,15 +4,18 @@
 # Copyrights licensed under the BSD license
 # See the accompanying LICENSE.txt file for terms.
 
+from __future__ import absolute_import
+
 import argparse
 import ast
-import exceptions
 import logging
-import pkg_resources
 import sys
 
+import pkg_resources
+import six
 
-class PipMissingException(exceptions.Exception):
+
+class PipMissingException(Exception):
     """Exception to be raised when pip is missing"""
     pass
 
@@ -25,7 +28,6 @@ except ImportError:
     raise PipMissingException("Please install pip first! You can follow the "
                               "directions here: {0}".format(pip_url))
 
-
 PIP_VERSION = pkg_resources.parse_version(pkg_resources.get_distribution("pip").version)
 # since pip 6.1.0, error output is in stderr instead of stdout
 STDERR_PIP_VERSION = pkg_resources.parse_version("6.1.0")
@@ -36,6 +38,7 @@ logger.addHandler(logging.StreamHandler())
 
 class WritableObject(object):
     """Object to redirect output (stdout and stderr) to"""
+
     def __init__(self):
         self.content = []
 
@@ -48,6 +51,7 @@ class WritableObject(object):
 
 class ImportParser(ast.NodeVisitor):
     """Object to parse a code file and collect all imports"""
+
     def __init__(self):
         # create a list to store all the imports we find
         self.imports = []
@@ -123,7 +127,7 @@ def install_missing_pkgs(imports):
         try:
             __import__(pkg)
         except ImportError as imp_err:
-            missing_module = imp_err.message.split()[-1]
+            missing_module = imp_err.args[0].split()[-1].strip("'")
 
             # redirect stdout and stderr
             stdout_write_obj = WritableObject()
@@ -158,7 +162,7 @@ def install_missing_pkgs(imports):
 
 def report_failed_pkgs(failed_pkgs):
     """Report failed packages"""
-    for pkg, reason in failed_pkgs.iteritems():
+    for pkg, reason in six.iteritems(failed_pkgs):
         logger.info("Failed to handle package \"{pkg}\" "
                     "because \"{reason}\"".format(pkg=pkg, reason=reason))
 

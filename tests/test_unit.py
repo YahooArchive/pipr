@@ -9,6 +9,8 @@ test_pipr
 
 Tests for `pipr` module.
 """
+from __future__ import absolute_import
+
 import os
 import tempfile
 import unittest
@@ -39,10 +41,18 @@ class TestPipr(unittest.TestCase):
     def test_get_all_imports(self):
         """Create a tempfile with imports and make sure we get them"""
         code_file = tempfile.NamedTemporaryFile(delete=False)
-        code_file.write("from x import y\n")
-        code_file.write("from p.q import r\n")
-        code_file.write("import abc\n")
-        code_file.write("# import world")
+        code_file.write(
+            "from x import y\n".encode('utf-8')
+        )
+        code_file.write(
+            "from p.q import r\n".encode('utf-8')
+        )
+        code_file.write(
+            "import abc\n".encode('utf-8')
+        )
+        code_file.write(
+            "# import world".encode('utf-8')
+        )
         code_file.close()
         imports = pipr.get_all_imports(code_file.name)
         os.remove(code_file.name)
@@ -61,6 +71,7 @@ class TestPipr(unittest.TestCase):
         self.assertFalse(isinstance(failed_pkgs, list))
         self.assertEqual(len(failed_pkgs), 1)
         self.assertEqual(len(installed_pkgs), 0)
+
 
 if __name__ == '__main__':
     unittest.main()

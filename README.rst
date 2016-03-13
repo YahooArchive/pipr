@@ -32,7 +32,7 @@ pipr can install missing dependencies for any Python file and generate a require
 
 Requirements
 ============
-pipr currently requires Python 2.7, but we are working on supporting Python 3
+pipr supports both Python 2.7, and Python 3.4
 
 Installation
 ============
