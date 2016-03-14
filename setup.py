@@ -2,6 +2,7 @@
 # Copyright (c) 2015, Yahoo Inc.
 # Copyrights licensed under the BSD
 # See the accompanying LICENSE.txt file for terms.
+from __future__ import absolute_import
 import os
 import json
 from setuptools import setup
@@ -136,4 +137,4 @@ if __name__ == '__main__':
     setup_arguments['version'] = metadata['version']
     setup_arguments['long_description'] = metadata['long_description']
     add_scripts_to_package()
-    setup(**setup_arguments)
+    setup(requires=['six'], **setup_arguments)

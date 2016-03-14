@@ -2,11 +2,12 @@
 # Copyrights licensed under the BSD
 # See the accompanying LICENSE.txt file for terms.
 
+from __future__ import absolute_import
+
 import json
 import os
 
-from pipr import *
-
+from .pipr import *
 
 _metadata_file = os.path.join(
     os.path.dirname(__file__),
