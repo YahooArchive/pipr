@@ -137,4 +137,4 @@ if __name__ == '__main__':
     setup_arguments['version'] = metadata['version']
     setup_arguments['long_description'] = metadata['long_description']
     add_scripts_to_package()
-    setup(requires=['six'], **setup_arguments)
+    setup(install_requires=['six'], **setup_arguments)
