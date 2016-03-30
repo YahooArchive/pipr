@@ -26,14 +26,15 @@ class TestPipr(unittest.TestCase):
     def test_parse_args(self):
         """Make sure we parse user arguments correctly"""
         args = ['./', '-r', '-d']
-        (filepath, requirements, debug) = pipr.get_and_parse_args(args)
+        (filepath, requirements, debug, recursive) = pipr.get_and_parse_args(args)
         self.assertEqual(filepath, './')
         self.assertFalse(filepath == 'abc')
         self.assertTrue(requirements)
         self.assertTrue(debug)
+        self.assertFalse(recursive)
         (filepath, requirements, debug) = None, None, None
         try:
-            (filepath, requirements, debug) = pipr.get_and_parse_args()
+            (filepath, requirements, debug, recursive) = pipr.get_and_parse_args()
         except:
             self.assertFalse(requirements)
             self.assertFalse(debug)
