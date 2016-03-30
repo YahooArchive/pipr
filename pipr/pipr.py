@@ -121,7 +121,6 @@ def get_all_imports(filepath):
 
 
 def install_missing_pkgs(imports):
-    print("imports are", imports)
     """Try to import all imports and pip install missing ones"""
     failed_pkgs = {}
     installed_pkgs = []
