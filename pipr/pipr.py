@@ -9,6 +9,7 @@ from __future__ import absolute_import
 import argparse
 import ast
 import logging
+import os
 import sys
 
 import pkg_resources
@@ -89,7 +90,9 @@ def get_and_parse_args(parser_args=None):
     parser.add_argument("-d", "--debug",
                         help="Add --debug to see debug output",
                         action="store_true")
-
+    parser.add_argument("-R", "--recursive",
+                        help="Add --recursive to handle project-wide dependency",
+                        action="store_true")
     # parse and save user arguments
     args = None
     if parser_args:
@@ -100,8 +103,9 @@ def get_and_parse_args(parser_args=None):
     filepath = args.filepath
     requirements = args.requirements
     debug = args.debug
+    recursive = args.recursive
 
-    return (filepath, requirements, debug)
+    return (filepath, requirements, debug, recursive)
 
 
 def get_all_imports(filepath):
@@ -184,15 +188,21 @@ def report_installed_pkgs(installed_pkgs, requirements):
 
 
 if __name__ == "__main__":
-    filepath, requirements, debug = get_and_parse_args()
+    filepath, requirements, debug, recursive = get_and_parse_args()
 
     # set logger level
     if debug:
         logger.setLevel(logging.DEBUG)
     else:
         logger.setLevel(logging.INFO)
-
-    imports = get_all_imports(filepath)
-    failed_pkgs, installed_pkgs = install_missing_pkgs(imports)
+    if recursive:
+        imports = []
+        for root, subFolders, files in os.walk(filepath):
+            for file in files:
+                if file.endswith('.py'):
+                    imports.extend(get_all_imports(os.path.join(root,file)))
+    else:
+        imports = get_all_imports(filepath)
+    failed_pkgs, installed_pkgs = install_missing_pkgs(set(imports))
     report_failed_pkgs(failed_pkgs)
     report_installed_pkgs(installed_pkgs, requirements)
