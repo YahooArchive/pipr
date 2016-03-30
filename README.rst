@@ -49,7 +49,7 @@ Usage
 .. code-block::
 
     $ pipr -h
-    usage: pipr [-h] [-r] [-d] filepath
+    usage: pipr [-h] [-r] [-d] [-R] filepath
 
     positional arguments:
     filepath            The path to the Python file
@@ -59,6 +59,7 @@ Usage
         -r, --requirements  Add --requirements to generate a requirements.txt
                             file in current directory
         -d, --debug         Add --debug to see debug output
+        -R, --recursive     Add --recursive to handle project-wide dependency
         
 .. code-block::
 
